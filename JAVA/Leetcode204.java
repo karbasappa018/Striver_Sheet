@@ -21,41 +21,33 @@ Constraints:
 0 <= n <= 5 * 106
 
 */
-
-
-
-
-#include<iostream>
-#include<vector>
-using namespace std;
-
-
-class Solution {
-    public :
-    
-    int countPrimes(int iNo)
+import java.util.Scanner;
+import java.util.Arrays;
+class Solution
+{
+    public int countPrimes(int iNo)
     {
-        if(iNo<=2)
+        if(iNo < 0  || iNo <= 2)
         {
             return 0;
         }
 
-        vector<bool> isPrime(iNo, true);
+        boolean[] isPrime = new boolean[iNo];
 
+        Arrays.fill(isPrime,true);
         isPrime[0] = false;
-        isPrime[1] = false;
+        isPrime[1]= false;
 
-        for(int i =4; i<iNo; i+=2)
+        for(int i = 4; i<iNo; i+=2)
         {
             isPrime[i] = false;
         }
 
-
-        for(int i= 3; 1LL*i*i<iNo; i+=2 )
+        for(int i = 3; i<iNo; i+=2)
         {
             if(isPrime[i])
             {
-                for(int j = i*i; j<iNo; j+=2*i)
+                for(int j=i*i; j<iNo; j+=i*2)
                 {
                     isPrime[j] = false;
                 }
@@ -63,7 +55,6 @@ class Solution {
         }
 
         int iCount = 0;
-
         for(int i = 2; i<iNo; i++)
         {
             if(isPrime[i])
@@ -73,18 +64,24 @@ class Solution {
         }
 
         return iCount;
+
+
     }
 
-};
+}
 
-int main()
+class Leetcode204
 {
-     Solution sobj;
-    int iValue = 0;
-    cin>>iValue;
+    public static void main(String a[])
+    {
+        Solution sobj = new Solution();
+        Scanner ssobj = new Scanner(System.in);
 
-    int iRet = sobj.countPrimes(iValue);
-    cout<<iRet;
-    
-    
+
+        int iValue = 0;
+        iValue = ssobj.nextInt();
+        int iRet = 0;
+        iRet = sobj.countPrimes(iValue);
+        System.out.println(iRet);
+    }
 }
